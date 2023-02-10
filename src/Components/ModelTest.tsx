@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import { db } from '../../firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function ModelTest() {
     const [modalVisible, setModalVisible] = useState(false);
+
+
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -15,7 +20,7 @@ export default function ModelTest() {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>List or Dictionary?</Text>
+            <Text style={styles.modalText}>List or Dictionary? </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>

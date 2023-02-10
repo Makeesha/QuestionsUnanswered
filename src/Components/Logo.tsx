@@ -1,20 +1,23 @@
-import { StyleSheet, View , Image} from 'react-native';
+import { StyleSheet, View , Image, ViewPagerAndroidBase} from 'react-native';
 
 export default function Logo() {
 
     return (
-        <Image style={styles.logo}
+        <View>
+        <Image 
 			source = {require('/Users/makeeshapruitt/Developer/capstone/QuestionsUnanswered/assets/logo2.png')}/>
+        </View>
     )
 }
 const styles = StyleSheet.create({ 
-    logo:	{
-        // display: 'flex',
-        // flexDirection: 'column',
-        justifyContent:"center",
-        alignItems: "center",
-        width: 175, 
-        height: 175,
+    container:	{
+        margin: 'auto',
+        padding: 50,
+        alignSelf: 'center',
+        // justifyContent:'center',
+        // alignItems: 'center',
+        width: 20, 
+        height: 200,
     }
 
 });

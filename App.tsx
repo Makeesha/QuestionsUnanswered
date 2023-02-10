@@ -11,31 +11,50 @@ import FirstDate from './src/Components/FirstDate';
 import NeverHaveIEver from './src/Components/NeverHaveIEver';
 import ModelTest from './src/Components/ModelTest';
 import Logo from './src/Components/Logo';
-// import Card from './src/Components/Card';
+import { db } from './firebaseConfig';
+import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
 
 
 export default function App() {
 	
-    	
+    // async function getCard () {
+    //     let totQueryList = []
+    //     const querySnapshot = await getDocs(collection(db, "This or That"));
+    //     querySnapshot.forEach((doc) => {
+    //     totQueryList.push(doc.data().card)
+    //     console.log(totQueryList)
+    //     const totArray = totQueryList
+       
+    //     return totArray[0]
+    // });}
+    // const docRef = await addDoc(collection(db, "TESTING"), {
+    //     card: "You're the best!",
+        
+    //   });
+    // console.log("Document written with ID: ", docRef.id);
+
+    // const deleteCard = await deleteDoc(doc(db, "TESTING", "Tokyo"));
+    // deleteCard
 	return (
 		
 		<View style={styles.container}>
-		
+		<View style={styles.logo}>
         <Logo></Logo>
+        </View>
         <About></About>
         <HowToPlay></HowToPlay>
-		
-        <ModelTest></ModelTest>
+
+
 		<ThisOrThat></ThisOrThat>
 		<MostLikelyTo></MostLikelyTo>
 		<Icebreakers></Icebreakers>
 		<WouldYouRather></WouldYouRather>
 		<FirstDate></FirstDate>
 		<NeverHaveIEver></NeverHaveIEver>
-        
+    
 		</View>
 
-  );
+);
 }
 
 const styles = StyleSheet.create({
@@ -44,7 +63,8 @@ const styles = StyleSheet.create({
 		flex:1,
 		justifyContent:"center",
 		backgroundColor:"#fff",
-		alignItems:"stretch"
+		alignItems:"stretch",
+        flexDirection: "column"
 		},
 		title: {
 		fontSize:20,
@@ -53,11 +73,14 @@ const styles = StyleSheet.create({
         
 		},
         
-          text: {
-            color: '#fff',
-            fontSize: 30,
-            fontWeight: 'bold',
-          },
+        text: {
+        color: '#fff',
+        fontSize: 30,
+        fontWeight: 'bold',
+        },
+        logo: {
+            
+        }
 		
 		});
 
