@@ -9,7 +9,7 @@ import Icebreakers from './src/Components/Icebreakers';
 import WouldYouRather from './src/Components/WouldYouRather';
 import FirstDate from './src/Components/FirstDate';
 import NeverHaveIEver from './src/Components/NeverHaveIEver';
-import ModelTest from './src/Components/ModelTest';
+import ModelTest from './src/Components/Favorites';
 import Logo from './src/Components/Logo';
 import { db } from './firebaseConfig';
 import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
@@ -41,6 +41,8 @@ export default function App() {
 		<View style={styles.logo}>
         <Logo></Logo>
         </View>
+        <View style={styles.cardContainer}></View>
+        <ModelTest></ModelTest>
         <About></About>
         <HowToPlay></HowToPlay>
 
@@ -51,7 +53,7 @@ export default function App() {
 		<WouldYouRather></WouldYouRather>
 		<FirstDate></FirstDate>
 		<NeverHaveIEver></NeverHaveIEver>
-    
+        
 		</View>
 
 );
@@ -75,12 +77,23 @@ const styles = StyleSheet.create({
         
         text: {
         color: '#fff',
-        fontSize: 30,
+        fontSize: 40,
         fontWeight: 'bold',
         },
+        
+        cardContainer: {
+            flex:1,
+		justifyContent:"center",
+		backgroundColor:"#fff",
+		alignItems:"stretch",
+        flexDirection: "column"
+		},
+
         logo: {
-            
+            alignSelf: "center"
         }
+
+    
 		
 		});
 

@@ -12,12 +12,10 @@ export default function Logo() {
 const styles = StyleSheet.create({ 
     container:	{
         margin: 'auto',
-        padding: 50,
-        alignSelf: 'center',
-        // justifyContent:'center',
-        // alignItems: 'center',
-        width: 20, 
-        height: 200,
+        padding: 100,
+        // alignSelf: 'center',
+        width: 400, 
+        height: 400,
     }
 
 });

@@ -1,42 +1,70 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 import { db } from '../../firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
 
-export default function ModelTest() {
+export default function Favorites() {
     const [modalVisible, setModalVisible] = useState(false);
+    const [info, setInfo] = useState([])
+    const [ids, setIds] = useState([])
+    const [currentCardIndex, setCurrentCardIndex] = useState(0);
+
+useEffect(() => {
+    const getData = async () => {
+        const card = query(collection(db, "Favorites"));
+    
+        onSnapshot(card, (querySnapshot) => {
+            const databaseInfo = [];
+            const dataIds = []
+
+    
+            querySnapshot.forEach((doc) => {
+                databaseInfo.push(doc.data().card);
+                dataIds.push(doc.id)
+            });
+            console.log(databaseInfo)
+            setIds(dataIds)
+            setInfo(databaseInfo)
+        });
+        }
+    
+        getData()
+    }, [])
 
 
-
-  return (
+    return (
+    
     <View style={styles.centeredView}>
-      <Modal
+    <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
+        Alert.alert('Modal has been closed.');
+        setModalVisible(!modalVisible);
         }}>
+        {info.map((data, index)=> 
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>List or Dictionary? </Text>
+        <View style={styles.modalView}>
+            <Text style={styles.modalText} key={ids[index]}>{data}</Text>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Close Card</Text>
+            style={[styles.button, styles.buttonClose]}
+            onPress={() => setModalVisible(!modalVisible)}>
+            <Text style={styles.textStyle}>Close Card</Text>
             </Pressable>
           </View>
         </View>
+        )}
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>View Card</Text>
+        <Text style={styles.textStyle}> Favorites</Text>
       </Pressable>
     </View>
-  );
-};
+    )};
+
+
 
 const styles = StyleSheet.create({
   centeredView: {
