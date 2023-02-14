@@ -11,30 +11,19 @@ import FirstDate from './src/Components/FirstDate';
 import NeverHaveIEver from './src/Components/NeverHaveIEver';
 import ModelTest from './src/Components/Favorites';
 import Logo from './src/Components/Logo';
+import Reflection from './src/Components/Reflection';
+import Couples from './src/Components/Couples';
 import { db } from './firebaseConfig';
 import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
 
 
 export default function App() {
-	
-    // async function getCard () {
-    //     let totQueryList = []
-    //     const querySnapshot = await getDocs(collection(db, "This or That"));
-    //     querySnapshot.forEach((doc) => {
-    //     totQueryList.push(doc.data().card)
-    //     console.log(totQueryList)
-    //     const totArray = totQueryList
-       
-    //     return totArray[0]
-    // });}
-    // const docRef = await addDoc(collection(db, "TESTING"), {
-    //     card: "You're the best!",
-        
-    //   });
-    // console.log("Document written with ID: ", docRef.id);
 
-    // const deleteCard = await deleteDoc(doc(db, "TESTING", "Tokyo"));
-    // deleteCard
+
+    async function deleteCard(dataB, docu) {
+        await deleteDoc(doc(db, dataB, docu))};
+
+
 	return (
 		
 		<View style={styles.container}>
@@ -50,14 +39,18 @@ export default function App() {
 		<ThisOrThat></ThisOrThat>
 		<MostLikelyTo></MostLikelyTo>
 		<Icebreakers></Icebreakers>
-		<WouldYouRather></WouldYouRather>
+        <WouldYouRather></WouldYouRather>
 		<FirstDate></FirstDate>
 		<NeverHaveIEver></NeverHaveIEver>
+        <Couples></Couples>
+        <Reflection></Reflection>
+        
         
 		</View>
+    )
 
-);
-}
+    }
+
 
 const styles = StyleSheet.create({
 	
@@ -93,7 +86,5 @@ const styles = StyleSheet.create({
             alignSelf: "center"
         }
 
-    
-		
 		});
 

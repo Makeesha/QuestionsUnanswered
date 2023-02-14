@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 import { db } from '../../firebaseConfig';
-import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
+import { collection, onSnapshot, query, doc, deleteDoc,} from 'firebase/firestore';
 
 export default function Favorites() {
     const [modalVisible, setModalVisible] = useState(false);
-    const [info, setInfo] = useState([])
-    const [ids, setIds] = useState([])
-    const [currentCardIndex, setCurrentCardIndex] = useState(0);
+    const [card, setCard] = useState([])
+    const [currentCardIndex, setCurrentCardIndex] = useState(1);
+    const [ids, setIds] = useState([]);
+    
 
 useEffect(() => {
     const getData = async () => {
@@ -16,21 +17,34 @@ useEffect(() => {
         onSnapshot(card, (querySnapshot) => {
             const databaseInfo = [];
             const dataIds = []
-
-    
+            
             querySnapshot.forEach((doc) => {
                 databaseInfo.push(doc.data().card);
                 dataIds.push(doc.id)
+        
             });
             console.log(databaseInfo)
+            setCard(databaseInfo)
             setIds(dataIds)
-            setInfo(databaseInfo)
         });
         }
     
         getData()
     }, [])
 
+    function deleteCard(deck: string, cardData: string) {
+        const docRef = doc(db, deck, cardData)
+        deleteDoc(docRef)
+        .then (() => {
+            console.log("Entire document has been deleted successfully.")
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        
+        // await deleteDoc(doc(db, deck, cardData));
+    }
+    
 
     return (
     
@@ -43,24 +57,28 @@ useEffect(() => {
         Alert.alert('Modal has been closed.');
         setModalVisible(!modalVisible);
         }}>
-        {info.map((data, index)=> 
+    
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
-            <Text style={styles.modalText} key={ids[index]}>{data}</Text>
+            <Text style={styles.modalText} >{card[currentCardIndex]}</Text>
+            <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}>
+        <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Next Card</Text></Pressable>
             <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}>
             <Text style={styles.textStyle}>Close Card</Text>
             </Pressable>
-          </View>
+        <Pressable onPress={() => deleteCard("Favorites", ids[currentCardIndex])}>
+        <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>🗑️ Card</Text></Pressable>
         </View>
-        )}
-      </Modal>
-      <Pressable
+        </View>
+    
+        </Modal>
+        <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}> Favorites</Text>
-      </Pressable>
+        <Text style={styles.textStyle}> Favorite Cards</Text>
+        </Pressable>
     </View>
     )};
 
@@ -110,4 +128,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25
   },
+  buttonNextCard: {
+      backgroundColor: 'pink'
+  }
 });

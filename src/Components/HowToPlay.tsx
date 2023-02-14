@@ -4,7 +4,7 @@ import { Alert, AppRegistry, Button, StyleSheet, View } from 'react-native';
 export default class HowTo extends Component {  
     onPressButton() {  
         Alert.alert('How to Play',
-        '1. Use solo as a journaling or writing prompt. 2. Use 1 on 1 to create emotional intimacy. 3. In groups ask questions from the fun decks. 4. Make your own rules!')  
+        '1. Use solo as a journaling/writing prompt or for reflection. 2. Use 1 on 1 to create emotional intimacy and learn more about each other. 3. In groups ask questions from the fun decks. 4. Make your own rules!')  
     }  
   
     render() {  
@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',  
     },  
     buttonContainer: {  
-        margin: 15  
+        margin: 5,
+        borderRadius: 20,
+        
     },  
 })  
 

@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Alert, Modal, Pressable } from 'react-native';
 import { db } from '../../firebaseConfig';
 import { addDoc, collection, getDocs, onSnapshot, query} from 'firebase/firestore';
 
-export default function Icebreakers() {
+export default  function Couples () {
     const [modalVisible, setModalVisible] = useState(false);
     const [favoriteCard, setFavoriteCard] = useState('☆');
     const [card, setCard] = useState([])
@@ -11,16 +11,14 @@ export default function Icebreakers() {
 
     useEffect(() => {
         const getData = async () => {
-            const card = query(collection(db, "Icebreakers"));
+            const card = query(collection(db, "Questions for couples"));
         
             onSnapshot(card, (querySnapshot) => {
                 let databaseInfo = [];
-                const dataIds = []
-    
-        
+                
                 querySnapshot.forEach((doc) => {
                     databaseInfo.push(doc.data().card);
-                    dataIds.push(doc.id)
+                    
                 });
                 databaseInfo = shuffle(databaseInfo)
                 // console.log(databaseInfo)
@@ -53,11 +51,11 @@ export default function Icebreakers() {
                 card: cardData,
             });
         }
-
     
+
     return (
 
-        <View style={styles.item3}>
+    <View style={styles.item1}>
         <Modal
         animationType="fade"
         transparent={true}
@@ -68,11 +66,13 @@ export default function Icebreakers() {
         }}>
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
-        <Text style={styles.modalText}>{card[currentCardIndex]} </Text>
+        <Text style={styles.modalText}>{card[currentCardIndex]}</Text>
+        
         <Pressable onPress={() => setFavoriteCard('⭐')}
-        onPressIn={() =>addFavorite("Favorites", card[currentCardIndex])}>
-            <Text style={styles.favorites}>{favoriteCard}</Text></Pressable>
-            <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}
+        onPressIn={() =>addFavorite("Favorites", card[currentCardIndex])} >
+            <Text style={styles.favorites}>{favoriteCard}</Text>
+            </Pressable>
+        <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}
         >
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Last Card</Text></Pressable>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}
@@ -85,17 +85,18 @@ export default function Icebreakers() {
             </Pressable>
             </View>
         </View>
-        </Modal>
-        <Pressable
-        onPress={() => setModalVisible(true)}>
-		<Text style={{fontSize:20, color:"#fff", textAlign: "center"}}>Icebreakers</Text>
-        </Pressable>
-		</View>
+    </Modal>
+    <Pressable
+    onPress={() => setModalVisible(true)}>
+    <Text style={{fontSize:20, color:"#fff", textAlign: "center"}}>Couple's Qs</Text>
+    </Pressable>
+    </View>
     )
-}
-const styles = StyleSheet.create({ 
-    item3: {
-		backgroundColor:"green",
+}   
+    
+const styles = StyleSheet.create({  
+    item1: {
+		backgroundColor:"lavender",
 		flex:1
 		},
         centeredView: {
@@ -105,46 +106,46 @@ const styles = StyleSheet.create({
             marginTop: 22,
     },
         modalView: {
-            margin: 20,
-            backgroundColor: 'white',
-            borderRadius: 20,
-            padding: 105,
-            alignItems: 'center',
-            shadowColor: '#000',
-            shadowOffset: {
-                width: 0,
-                height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 4,
-            elevation: 5,
-            },
-            button: {   
-            borderRadius: 20,
-            padding: 10,
-            elevation: 2,
-            },
-            buttonOpen: {
-            backgroundColor: '#F194FF',
-            },
-            buttonClose: {
-            backgroundColor: '#2196F3',
-            },
-            textStyle: {
-            color: 'white',
-            fontWeight: 'bold',
-            textAlign: 'center',
-            
-            },
-            modalText: {
-            marginBottom: 15,
-            textAlign: 'center',
-            fontSize: 25
-            },
-            favorites: {
-                fontSize: 30
-            },
-            buttonNextCard: {
-                backgroundColor: 'pink'
-            }
-});
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 105,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        },
+        button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        },
+        buttonOpen: {
+        backgroundColor: '#F194FF',
+        },
+        buttonClose: {
+        backgroundColor: '#2196F3',
+        },
+        textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        
+        },
+        modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+        fontSize: 25
+        },
+        favorites: {
+            fontSize: 30
+        },
+        buttonNextCard: {
+            backgroundColor: 'pink'
+        }
+    });
