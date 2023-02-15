@@ -72,23 +72,27 @@ export default  function Reflection () {
         onPressIn={() =>addFavorite("Favorites", card[currentCardIndex])} >
             <Text style={styles.favorites}>{favoriteCard}</Text>
             </Pressable>
+        <View style={styles.buttonsContainer}>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}
         >
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Last Card</Text></Pressable>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}
         onPressIn ={() => setFavoriteCard('☆')}>
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Next Card</Text></Pressable>
+        </View>
+        <View style={styles.buttonCloseContainer}>
         <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textStyle}>Close Card</Text>
+            <Text style={styles.textStyle}>X Close</Text>
             </Pressable>
+            </View>
             </View>
         </View>
     </Modal>
     <Pressable
     onPress={() => setModalVisible(true)}>
-    <Text style={{fontSize:20, color:"#fff", textAlign: "center"}} >Reflection</Text>
+    <Text style={{fontSize:30, color:"#fff", textAlign: "center", margin: 31}} >Reflect</Text>
     </Pressable>
     </View>
     )
@@ -96,7 +100,7 @@ export default  function Reflection () {
     
 const styles = StyleSheet.create({  
     item1: {
-		backgroundColor:"fuchsia",
+		backgroundColor:"#FF1493",
 		flex:1
 		},
         centeredView: {
@@ -147,5 +151,12 @@ const styles = StyleSheet.create({
         },
         buttonNextCard: {
             backgroundColor: 'pink'
+        },
+        buttonsContainer: {
+            flexDirection: 'row'
+        },
+        buttonCloseContainer: {
+          top: 10,
+          position: 'absolute',
         }
     });

@@ -1,4 +1,4 @@
-import { StyleSheet, View , Image, ViewPagerAndroidBase} from 'react-native';
+import { StyleSheet, View , Image } from 'react-native';
 
 export default function Logo() {
 
@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     container:	{
         width: 400, 
         height: 400,
+        
     }
 
 });

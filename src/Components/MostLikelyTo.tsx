@@ -56,45 +56,51 @@ export default function MostLikelyTo () {
             
     return (
 
-        <View style={styles.item2}>
-            <Modal
-    animationType="fade"
-    transparent={true}
-    visible={modalVisible}
-    onRequestClose={() => {
+    <View style={styles.item2}>
+         <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
         Alert.alert('Modal has been closed.');
         setModalVisible(!modalVisible);
-    }}>
-    <View style={styles.centeredView}>
-    <View style={styles.modalView}>
-    <Text style={styles.modalText}>{card[currentCardIndex]} </Text>
-    <Pressable onPress={() => setFavoriteCard('⭐')}
-    onPressIn={() =>addFavorite("Favorites", card[currentCardIndex])}>
-    <Text style={styles.favorites}>{favoriteCard}</Text>
-    </Pressable>
-    <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}>
+        }}>
+        <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+        <Text style={styles.modalText}>{card[currentCardIndex]}</Text>
+        
+        <Pressable onPress={() => setFavoriteCard('⭐')}
+        onPressIn={() =>addFavorite("Favorites", card[currentCardIndex])} >
+            <Text style={styles.favorites}>{favoriteCard}</Text>
+            </Pressable>
+        <View style={styles.buttonsContainer}>
+        <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}
+        >
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Last Card</Text></Pressable>
-    <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}
-    onPressIn ={() => setFavoriteCard('☆')}>
+        <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}
+        onPressIn ={() => setFavoriteCard('☆')}>
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Next Card</Text></Pressable>
-    <Pressable
+        </View>
+        <View style={styles.buttonCloseContainer}>
+        <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textStyle}>Close Card</Text>
-        </Pressable>
+            <Text style={styles.textStyle}>X Close</Text>
+            </Pressable>
+            </View>
+            </View>
         </View>
-    </View>
     </Modal>
     <Pressable
     onPress={() => setModalVisible(true)}>
-    <Text style={{fontSize:20, color:"#fff", textAlign: "center"}}>Most likely to</Text>
+    <Text style={{fontSize:30, color:"#fff", textAlign: "center", margin: 20}}>Most likely to</Text>
     </Pressable>
     </View>
     )
 }
 const styles = StyleSheet.create({ 
 item2: {
-    backgroundColor:"purple",
+    backgroundColor: "purple",
     flex:1
     },
     centeredView: {
@@ -145,5 +151,12 @@ item2: {
     },
     buttonNextCard: {
         backgroundColor: 'pink'
+    },
+    buttonsContainer: {
+        flexDirection: 'row'
+    },
+    buttonCloseContainer: {
+      top: 10,
+      position: 'absolute',
     }
 });

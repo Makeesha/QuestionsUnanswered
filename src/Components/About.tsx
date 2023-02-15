@@ -27,7 +27,7 @@ export default class About extends Component {
         );  
     }  
 }  
-  
+
 const styles = StyleSheet.create({  
     container: {  
         flex: 1,  

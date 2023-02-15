@@ -1,5 +1,5 @@
 import React, { Component } from 'react';  
-import { Alert, AppRegistry, Button, StyleSheet, View } from 'react-native';  
+import { Alert, Button, StyleSheet, View } from 'react-native';  
   
 export default class HowTo extends Component {  
     onPressButton() {  

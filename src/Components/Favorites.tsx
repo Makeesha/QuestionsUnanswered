@@ -9,7 +9,12 @@ export default function Favorites() {
     const [currentCardIndex, setCurrentCardIndex] = useState(1);
     const [ids, setIds] = useState([]);
     
-
+// useEffect(() => {
+//     if(currentCardIndex < 1)
+//     setCurrentCardIndex(1)
+//     if(currentCardIndex > card.length-1)
+//     setCurrentCardIndex(card.length-1)
+// });
 useEffect(() => {
     const getData = async () => {
         const card = query(collection(db, "Favorites"));
@@ -23,7 +28,7 @@ useEffect(() => {
                 dataIds.push(doc.id)
         
             });
-            console.log(databaseInfo)
+            // console.log(databaseInfo)
             setCard(databaseInfo)
             setIds(dataIds)
         });
@@ -32,8 +37,8 @@ useEffect(() => {
         getData()
     }, [])
 
-    function deleteCard(deck: string, cardData: string) {
-        const docRef = doc(db, deck, cardData)
+    function deleteCard(deck: string, cardId: string) {
+        const docRef = doc(db, deck, cardId)
         deleteDoc(docRef)
         .then (() => {
             console.log("Entire document has been deleted successfully.")
@@ -60,16 +65,25 @@ useEffect(() => {
     
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
-            <Text style={styles.modalText} >{card[currentCardIndex]}</Text>
-            <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}>
+        <Text style={styles.modalText}>{card[currentCardIndex]}
+        </Text>
+        <View style={styles.buttonsContainer}>
+        <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}>
+        <Text style={[styles.button, styles.buttonNextCard, styles.textStyle]}>Last Card</Text></Pressable>
+        <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}>
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Next Card</Text></Pressable>
+        </View>
+        <View style={styles.buttonCloseContainer}>
             <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textStyle}>Close Card</Text>
+            <Text style={styles.textStyle}>X Close</Text>
             </Pressable>
-        <Pressable onPress={() => deleteCard("Favorites", ids[currentCardIndex])}>
-        <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>🗑️ Card</Text></Pressable>
+            </View>
+            <View style={styles.buttonDeleteContainer}>
+            <Pressable onPress={() => deleteCard("Favorites", ids[currentCardIndex])}>
+        <Text style={[styles.button, styles.buttonDeleteCard,styles.textStyle, styles.buttonsContainer]}>🗑️ Delete</Text></Pressable>
+        </View>
         </View>
         </View>
     
@@ -77,7 +91,7 @@ useEffect(() => {
         <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}> Favorite Cards</Text>
+        <Text style={styles.textStyle}>⭐ Favorite Cards</Text>
         </Pressable>
     </View>
     )};
@@ -116,6 +130,7 @@ const styles = StyleSheet.create({
   },
   buttonClose: {
     backgroundColor: '#2196F3',
+
   },
   textStyle: {
     color: 'white',
@@ -130,5 +145,19 @@ const styles = StyleSheet.create({
   },
   buttonNextCard: {
       backgroundColor: 'pink'
+  },
+  buttonDeleteCard: {
+    backgroundColor: "#cd5c5c"
+  },
+  buttonsContainer: {
+    flexDirection: 'row'
+  },
+  buttonDeleteContainer: {
+    bottom: 10,
+    position: "absolute"
+  },
+  buttonCloseContainer: {
+    top: 10,
+    position: 'absolute',
   }
 });

@@ -9,6 +9,13 @@ export default  function Couples () {
     const [card, setCard] = useState([])
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
+    // useEffect(() => {
+    //     if(currentCardIndex < 1)
+    //     setCurrentCardIndex(0)
+    //     if(currentCardIndex > card.length-1)
+    //     setCurrentCardIndex(card.length-1)
+    // });
+
     useEffect(() => {
         const getData = async () => {
             const card = query(collection(db, "Questions for couples"));
@@ -72,23 +79,27 @@ export default  function Couples () {
         onPressIn={() =>addFavorite("Favorites", card[currentCardIndex])} >
             <Text style={styles.favorites}>{favoriteCard}</Text>
             </Pressable>
+        <View style={styles.buttonsContainer}>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}
         >
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Last Card</Text></Pressable>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}
         onPressIn ={() => setFavoriteCard('☆')}>
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Next Card</Text></Pressable>
+        </View>
+        <View style={styles.buttonCloseContainer}>
         <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textStyle}>Close Card</Text>
+            <Text style={styles.textStyle}>X Close</Text>
             </Pressable>
+            </View>
             </View>
         </View>
     </Modal>
     <Pressable
     onPress={() => setModalVisible(true)}>
-    <Text style={{fontSize:20, color:"#fff", textAlign: "center"}}>Couple's Qs</Text>
+    <Text style={{fontSize:26, color:"#fff", textAlign: "center", margin: 20}}>Couple's questions</Text>
     </Pressable>
     </View>
     )
@@ -96,7 +107,7 @@ export default  function Couples () {
     
 const styles = StyleSheet.create({  
     item1: {
-		backgroundColor:"lavender",
+		backgroundColor:"#6b8e23",
 		flex:1
 		},
         centeredView: {
@@ -147,5 +158,12 @@ const styles = StyleSheet.create({
         },
         buttonNextCard: {
             backgroundColor: 'pink'
+        },
+        buttonsContainer: {
+            flexDirection: 'row'
+        },
+        buttonCloseContainer: {
+          top: 10,
+          position: 'absolute',
         }
     });

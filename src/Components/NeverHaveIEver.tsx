@@ -67,28 +67,33 @@ export default function NeverHaveIEver() {
         }}>
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
-        <Text style={styles.modalText}>{card[currentCardIndex]} </Text>
+        <Text style={styles.modalText}>{card[currentCardIndex]}</Text>
+        
         <Pressable onPress={() => setFavoriteCard('⭐')}
         onPressIn={() =>addFavorite("Favorites", card[currentCardIndex])} >
             <Text style={styles.favorites}>{favoriteCard}</Text>
             </Pressable>
+        <View style={styles.buttonsContainer}>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}
         >
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Last Card</Text></Pressable>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}
         onPressIn ={() => setFavoriteCard('☆')}>
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Next Card</Text></Pressable>
+        </View>
+        <View style={styles.buttonCloseContainer}>
         <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textStyle}>Close Card</Text>
+            <Text style={styles.textStyle}>X Close</Text>
             </Pressable>
+            </View>
             </View>
         </View>
     </Modal>
     <Pressable
     onPress={() => setModalVisible(true)}>
-    <Text style={{fontSize:20, color:"#fff", textAlign: "center"}}>Never have I ever</Text>
+    <Text style={{fontSize:26, color:"#fff", textAlign: "center", margin: 30}}>Never have I ever</Text>
     </Pressable>
     </View>
     );
@@ -97,7 +102,7 @@ export default function NeverHaveIEver() {
 
 const styles = StyleSheet.create({ 
     item6: {
-        backgroundColor:"blue",
+        backgroundColor:"#1e90ff",
         flex:1
     },
     centeredView: {
@@ -148,5 +153,12 @@ const styles = StyleSheet.create({
     },
     buttonNextCard: {
         backgroundColor: 'pink'
+    },
+    buttonsContainer: {
+        flexDirection: 'row'
+    },
+    buttonCloseContainer: {
+      top: 10,
+      position: 'absolute',
     }
 });

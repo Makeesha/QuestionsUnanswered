@@ -9,6 +9,7 @@ export default function FirstDate() {
     const [card, setCard] = useState([])
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
+
     useEffect(() => {
         const getData = async () => {
             const card = query(collection(db, "First date questions"));
@@ -66,27 +67,32 @@ export default function FirstDate() {
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
         <Text style={styles.modalText}>{card[currentCardIndex]}</Text>
+        
         <Pressable onPress={() => setFavoriteCard('⭐')}
         onPressIn={() =>addFavorite("Favorites", card[currentCardIndex])} >
             <Text style={styles.favorites}>{favoriteCard}</Text>
             </Pressable>
+        <View style={styles.buttonsContainer}>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex - 1)}
         >
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Last Card</Text></Pressable>
         <Pressable onPress={() => setCurrentCardIndex(currentCardIndex + 1)}
         onPressIn ={() => setFavoriteCard('☆')}>
         <Text style={[styles.button, styles.buttonNextCard,styles.textStyle]}>Next Card</Text></Pressable>
+        </View>
+        <View style={styles.buttonCloseContainer}>
         <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textStyle}>Close Card</Text>
+            <Text style={styles.textStyle}>X Close</Text>
             </Pressable>
+            </View>
             </View>
         </View>
     </Modal>
     <Pressable
     onPress={() => setModalVisible(true)}>
-    <Text style={{fontSize:20, color:"#fff", textAlign: "center"}}>First date questions</Text>
+    <Text style={{fontSize:28, color:"#fff", textAlign: "center", margin: 16}}>First date questions</Text>
     </Pressable>
     </View>
     )
@@ -144,5 +150,12 @@ const styles = StyleSheet.create({
     },
     buttonNextCard: {
         backgroundColor: 'pink'
+    },
+    buttonsContainer: {
+        flexDirection: 'row'
+    },
+    buttonCloseContainer: {
+      top: 10,
+      position: 'absolute',
     }
 });
