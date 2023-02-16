@@ -9,13 +9,7 @@ export default  function Couples () {
     const [card, setCard] = useState([])
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
-    // useEffect(() => {
-    //     if(currentCardIndex < 1)
-    //     setCurrentCardIndex(0)
-    //     if(currentCardIndex > card.length-1)
-    //     setCurrentCardIndex(card.length-1)
-    // });
-
+ 
     useEffect(() => {
         const getData = async () => {
             const card = query(collection(db, "Questions for couples"));
@@ -99,7 +93,7 @@ export default  function Couples () {
     </Modal>
     <Pressable
     onPress={() => setModalVisible(true)}>
-    <Text style={{fontSize:26, color:"#fff", textAlign: "center", margin: 20}}>Couple's questions</Text>
+    <Text style={{fontSize:25, color:"#fff", textAlign: "center", margin: 21}}>Couple's questions</Text>
     </Pressable>
     </View>
     )
