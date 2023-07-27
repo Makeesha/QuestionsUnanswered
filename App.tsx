@@ -19,7 +19,7 @@ import Couples from './src/Components/Couples';
 
 export default function App() {
         
- 
+
 	return (
 		
 		<SafeAreaView style={styles.container}>
@@ -50,8 +50,8 @@ export default function App() {
         <Icebreakers></Icebreakers></View>
         <View style={styles.deck}>
         <NeverHaveIEver></NeverHaveIEver></View>
-        {/* <View style={styles.deck}>
-        <YesOrNo></YesOrNo></View> */}
+        <View style={styles.deck}>
+        <YesOrNo></YesOrNo></View>
         </View>
         <Text style={styles.footer}>Made with 💕 by Makeesha</Text>
         </View>
